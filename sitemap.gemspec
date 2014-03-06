@@ -1,7 +1,7 @@
 require File.expand_path('../lib/sitemap/version', __FILE__)
 
 spec = Gem::Specification.new do |spec|
-  spec.name = "sitemap"
+  spec.name = "sitemap-sc"
   spec.version = Sitemap::VERSION
   spec.summary = "Sitemap"
   spec.description = "A simple ruby on rails sitemap generator"

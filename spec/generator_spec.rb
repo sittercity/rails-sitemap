@@ -185,7 +185,7 @@ describe "Generator" do
   end
 
   it "should set the sitemap url based on the current host" do
-    Sitemap::Generator.instance.load(:host => "someplace.com") {}
+    Sitemap::Generator.instance.load(:host => "someplace.com", :s3_bucket_path => "bucket.com") {}
     Sitemap::Generator.instance.file_url.must_equal "http://someplace.com/sitemap.xml"
   end
 
@@ -228,7 +228,7 @@ describe "Generator" do
     end
 
     it "should have an index page" do
-      Sitemap::Generator.instance.load(:host => "someplace.com") do
+      Sitemap::Generator.instance.load(:host => "someplace.com", :s3_bucket_path => "bucket.com") do
         path :root
         path :root
         path :root
@@ -241,6 +241,18 @@ describe "Generator" do
       Sitemap::Generator.instance.fragments.length.must_equal 3
     end
 
+    it "should use the s3_bucket_path on #file_bucket_url" do
+      Sitemap::Generator.instance.load(:host => "host.com", :s3_bucket_path => "bucket.com") do
+        path :root
+        path :root
+        path :root
+        path :root
+        path :root
+      end
+      Sitemap::Generator.instance.build!
+      doc = Nokogiri::HTML(Sitemap::Generator.instance.render("index"))
+      elements = doc.xpath "//sitemap"
+      Sitemap::Generator.instance.file_bucket_url.must_equal "http://bucket.com/sitemap.xml"
+    end
   end
-
 end
