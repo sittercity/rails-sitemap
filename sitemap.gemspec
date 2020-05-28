@@ -5,6 +5,7 @@ spec = Gem::Specification.new do |spec|
   spec.version = Sitemap::VERSION
   spec.summary = "Sitemap"
   spec.description = "A simple ruby on rails sitemap generator"
+  spec.metadata = { "github_repo" => "ssh://github.com/sittercity/rails-sitemap" }
 
   spec.authors << "Daniel Mircea"
   spec.email = "daniel@viseztrance.com"
